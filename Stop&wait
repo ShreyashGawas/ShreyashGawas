@@ -1,0 +1,36 @@
+#include <stdio.h>
+#define MAX_FRAMES 5
+typedef struct
+{
+    int seq_no;
+    int data;
+} Frame;
+void send_frame(Frame frame)
+{
+    printf("Sending frame %d with data %d with data \n", frame.seq_no, frame.data);
+}
+void receive_ack(int ack)
+{
+    printf("Acknowledgement for the following frame was received %d\n", ack);
+}
+int main()
+{
+    Frame frames[MAX_FRAMES];
+    int i;
+    for (i = 0; i < MAX_FRAMES; i++)
+    {
+        frames[i].seq_no = i;
+        frames[i].data = i * 10;
+    }
+
+
+
+    for (i = 0; i < MAX_FRAMES; i++)
+    {
+        send_frame(frames[i]);
+        receive_ack(frames[i].seq_no);
+        printf("hit enter to continue...\n");
+        getchar();
+    }
+    return 0;
+}
